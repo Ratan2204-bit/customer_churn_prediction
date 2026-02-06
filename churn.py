@@ -19,27 +19,45 @@ df = pd.get_dummies(df, drop_first=True)
 print(df.head())
 
 from sklearn.model_selection import train_test_split
+
 from sklearn.preprocessing import StandardScaler
+=======
+from sklearn.preprocessing import StandardScalar
+
 
 X = df.drop('Churn' , axis=1)
 Y = df['Churn']
 
 X_train , X_test , Y_train , Y_test = train_test_split(X,Y, test_size=0.2 , random_state=42)
 
+
 scaler = StandardScaler()
+
+scaler = StandardScalar()
+
 X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
 
 from sklearn.linear_model import LogisticRegression
+
 from sklearn.metrics import accuracy_score , confusion_matrix , classification_report
 
 model =  LogisticRegression(max_iter=1000 )
+
+from sklearn.metrics import accuracy_score , confussion_matrix , classification_report
+
+model =  LogisticRegression(max_iter=1000)
+
 model.fit(X_train , Y_train)
 
 y_pred = model.predict(X_test)
 
 print("Accuracy:" , accuracy_score(Y_test , y_pred))
+
 print(confusion_matrix(Y_test  , y_pred))
+
+print(confussion_matrix(Y_test  , y_pred))
+
 print(classification_report(Y_test , y_pred))
 
 from sklearn.ensemble import RandomForestClassifier
@@ -63,6 +81,7 @@ plt.show()
 
 sns.boxplot(x='Churn' , y='MonthlyCharges' , data=df)
 plt.title("Churn vs MonthlyCharges")
+
 plt.show()
 
 contract_cols = [col for col in df.columns if 'Contract_' in col]
@@ -94,3 +113,6 @@ from sklearn.metrics import roc_auc_score
 
 y_prob = best_model.predict_proba(X_test)[:,1]
 print("ROC-AUC Score :", roc_auc_score(Y_test, y_prob))
+
+plt.show()
+
